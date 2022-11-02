@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head'); %>
+</head>
+
+<body>
+  <header class="topheader">
+    <%- include('../partials/header'); %>
+  </header>
+  <img class="hero-banner" src="assets/herobanner.jpeg" alt="hero-image">
+  <h2 class="subtitle"> Boutique de Orquideas. <br> Somos una tienda dedicada a cultivar felicidad.</h2>
+  <div class="articles-container">
+    <div class="article">
+      <h2>Orquidea Phalaenopsis</h2>
+      <div class="flex">
+        <img class="img-product" src="assets/Phalaenopsis-sp.jpg" alt="orquidea Phalaenopsis">
+        <p class="detail-product">Uno de nuestros productos destacados. Originaria de Asia, se adapta a la comodidad de su
+          hogar. <br>Recomendaciones: No exponer al sol directo. Riego moderado. <br><br> Precio: $1500</p>
+      </div>
+      <button class="buy"><span class="icon-basket"><a href="#carrito" onclick="window.location.href='carrito'"> COMPRAR </a></span>
+      </button>
+    </div>
+  </div>
+  <br>
+  <br>
+</body>
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+
+</html>

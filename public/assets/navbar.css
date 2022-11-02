@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700&display=swap');
+
+a {
+  text-decoration: none;
+}
+
+.topheader {
+  justify-content: space-between;
+  box-shadow: 0 4px 5px var(--navbar-shallow-color);
+  position: fixed;
+  width: 100%;
+}
+
+.topnav {
+  display: flex;
+  background-color: #8C494F;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 0 auto:
+}
+
+.logo img{
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  list-style: none;
+  margin:0;
+  padding:0;
+}
+
+.menu li {
+  padding: 0 15px;
+}
+
+.menu a{
+  font-size: 18px;
+  font-weight: 500 ;
+  line-height: 130px;
+}

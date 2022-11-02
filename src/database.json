@@ -1,0 +1,32 @@
+[
+  {
+    "id":1,
+    "nombre":"Orquidea Mono",
+    "descripcion": "es una orquidea rara",
+    "precio": 1900
+  },
+  {
+    "id":2,
+    "nombre":"Orquidea Negra",
+    "descripcion": "orquidea negra",
+    "precio": 1800  
+  },
+  {
+    "id":3,
+    "nombre":"Orquidea Phalaenopsis",
+    "descripcion": "orquidea comun",
+    "precio": 1500
+  }
+  {
+    "id":4,
+    "nombre":"Orquidea Arundina",
+    "descripcion": "es una orquidea con forma de campana",
+    "precio": 1600
+  },
+  {
+    "id":5,
+    "nombre":"Orquidea Diuris",
+    "descripcion": "es una orquidea diuris",
+    "precio": 1500
+  }
+]
