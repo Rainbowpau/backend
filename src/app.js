@@ -3,6 +3,7 @@ const fs = require('fs');
 const app = express();
 var bodyParser = require('body-parser');
 const bcrypt = require("bcrypt");
+const cookieParser = require("cookie-parser")
 const { body, validationResult } = require('express-validator')
 
 //numero para bycript
@@ -15,6 +16,17 @@ app.use(express.static('public'));
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }))
 
+// manipular las cookies
+app.use(cookieParser());
+/* app.use((req, res, next) => {
+  const cookie = req.cookies.boutiqueSessionLogued;
+  if (req.url !== '/login' && !cookie) {
+    res.redirect('/login');
+  } else {
+    next();
+  }
+}) */
+
 //asi devuelve mis vistas en ejs
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -25,8 +37,9 @@ app.listen(PORT, () => console.log('escuchando en el puerto', PORT))
 
 //renderizo mis vistas
 app.get('/', (req, res) => {
-  // res.send('estoy en el home')
-  res.render('index');
+  const producstFS = fs.readFileSync(__dirname + "/products.json", "utf-8");
+  const products = JSON.parse(producstFS);
+  res.render('index', {products});
 })
 
 app.get('/carrito', (req, res) => {
@@ -37,8 +50,15 @@ app.get('/login', (req, res) => {
   res.render('login')
 })
 
-app.get('/product-detail', (req, res) => {
-  res.render('product-detail')
+app.get('/product-detail-:id', (req, res) => {
+  const producstFS = fs.readFileSync(__dirname + "/products.json", "utf-8");
+  const products = JSON.parse(producstFS);
+  const product = products.find(product => product.id.toString() === req.params.id)
+  if (product) {
+    res.render('product-detail', {product})
+  } else {
+    res.status(404).send('Pagina no encontrada');
+  }
 })
 
 app.get('/registro', (req, res) => {
@@ -77,6 +97,35 @@ app.post("/registro",
   }
 )
 
-app.get('*', function(req, res){
+app.post("/login",
+  body("email").isEmail(),
+  body("password").isLength({ min: 5 }),
+  (req, res) => {
+    const { email, password } = req.body;
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    } else {
+      const usersFS = fs.readFileSync(__dirname + "/users.json", "utf-8");
+      const usersParsed = JSON.parse(usersFS);
+      const user = usersParsed.find((user) => user.email === email)
+      if (user) {
+        bcrypt.compare(password, user.password, function (err, result) {
+          if (result){
+            res.cookie('boutiqueSessionLogued',true, { maxAge: 900000, httpOnly: true });
+            return res.redirect('/');
+          } else {
+            return res.status(400).send("contrasena incorrecta")
+          }
+        });
+
+      } else {
+        return res.status(400).json('Ups no encontramos tu usuario')
+      }
+    }
+  })
+
+app.get('*', function (req, res) {
   res.status(404).send('Pagina no encontrada');
 });

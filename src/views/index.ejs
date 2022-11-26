@@ -4,6 +4,7 @@
 <head>
   <%- include('../partials/head'); %>
 </head>
+
 <body>
   <header class="topheader">
     <%- include('../partials/header'); %>
@@ -11,27 +12,17 @@
   <img class="hero-banner" src="./assets/herobanner.jpeg" alt="hero-image">
   <h2 class="subtitle"> Boutique de Orquideas. <br>Somos una tienda dedicada a cultivar felicidad.</h2>
   <div class="articles-container">
+    <% products.forEach(function(product){ %>
     <div class="article">
-      <h2>Plantas</h2>
-      <img class="img-product" src="assets/orquideanegra.jpg" alt="orquidea negra">
-      <button class="see-more" onclick="window.location.href='product-detail'">
+      <h2 style="white-space: nowrap;">
+        <%= product.nombre %>
+      </h2>
+      <img class="img-product" src="<%= product.foto%>" alt="orquidea negra">
+      <button class="see-more" onclick="window.location.href='product-detail-<%= product.id%>'">
         VER MAS
       </button>
     </div>
-    <div class="article">
-      <h2>Macetas</h2>
-      <img class="img-product" src="assets/maceta.jpg" alt="orquidea negra">
-      <button class="see-more" onclick="window.location.href='product-detail'">
-        VER MAS
-      </button>
-    </div>
-    <div class="article">
-      <h2>Accesorios</h2>
-      <img class="img-product" src="assets/pulverizadores.jpg" alt="orquidea negra">
-      <button class="see-more" onclick="window.location.href='product-detail'">
-        VER MAS
-      </button>
-    </div>
+    <% })%>
   </div>
   </div>
   <br>

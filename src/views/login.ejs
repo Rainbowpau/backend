@@ -5,15 +5,15 @@
 </head>
 <body>
   <button class="boton-home" onclick="window.location.href='/'"> Volver a INICIO</button>
-  <form action="" method="post" id="form">
+  <form action="/login" method="post"encType="application/x-www-form-urlencoded" id="form">
     <div class="form">
       <h1>Ingresa</h1>
       <div class="grupo">
-        <input type="email" name="" id="email" required> <span class="barra"></span>
+        <input type="email" name="email" id="email" required> <span class="barra"></span>
         <label>Email</label>
       </div>
       <div class="grupo">
-        <input type="password" name="" id="password" required> <span class="barra"></span>
+        <input type="password" name="password" id="password" required> <span class="barra"></span>
         <label>Password</label>
       </div>
       <button type="submit"> Ingresar</button>
