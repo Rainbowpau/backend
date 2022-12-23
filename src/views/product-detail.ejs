@@ -17,9 +17,8 @@
         <%= product.nombre %>
       </h2>
       <div class="flex">
-        <img class="img-product" src="assets/Phalaenopsis-sp.jpg" alt="orquidea Phalaenopsis">
-        <p class="detail-product">Uno de nuestros productos destacados. Originaria de Asia, se adapta a la comodidad de su
-          hogar. <br>Recomendaciones: No exponer al sol directo. Riego moderado. <br><br> Precio: $1500</p>
+        <img class="img-product" src=<%=product.foto%>>
+        <p class="detail-product"> <%=product.descripcion%> <br><br> $ <%=product.precio%></p>
       </div>
       <button class="buy"><span class="icon-basket"><a href="#carrito" onclick="window.location.href='carrito'"> COMPRAR </a></span>
       </button>
