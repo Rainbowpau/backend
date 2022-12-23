@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="assets/validacion-front.js"></script>
   <%- include('../partials/head-for-register-login'); %>
 </head>
 <body>
   <button class="boton-home" onclick="window.location.href='/'"> Volver a INICIO</button>
-  <form action="/registro" method="post" encType="application/x-www-form-urlencoded" id="form">
+  <form action="/registro" method="post" onsubmit=" checkForm(event, this)" encType="application/x-www-form-urlencoded" id="form">
     <div class="form">
       <h1>Regístrate</h1>
       <div class="grupo">
