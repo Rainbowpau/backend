@@ -3,6 +3,7 @@
 
 <head>
   <%- include('../partials/head'); %>
+  <script src="scripts/product-detail.js"></script>
 </head>
 
 <body>
@@ -20,7 +21,7 @@
         <img class="img-product" src=<%=product.foto%>>
         <p class="detail-product"> <%=product.descripcion%> <br><br> $ <%=product.precio%></p>
       </div>
-      <button class="buy"><span class="icon-basket"><a href="#carrito" onclick="window.location.href='carrito'"> COMPRAR </a></span>
+      <button class="buy"><span class="icon-basket"><a href="#carrito" onclick="addToCart()"> COMPRAR </a></span>
       </button>
     </div>
   </div>

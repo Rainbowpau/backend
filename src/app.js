@@ -17,8 +17,8 @@ app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // manipular las cookies
-app.use(cookieParser());
-/* app.use((req, res, next) => {
+app.use(cookieParser());/* 
+app.use((req, res, next) => {
   const cookie = req.cookies.boutiqueSessionLogued;
   if (req.url !== '/login' && !cookie) {
     res.redirect('/login');
@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/carrito', (req, res) => {
-  res.render('carrito')
+  res.render('carrito');
 })
 
 app.get('/login', (req, res) => {

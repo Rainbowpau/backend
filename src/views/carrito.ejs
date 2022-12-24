@@ -11,28 +11,13 @@
   </header>
   <img class="hero-banner" src="assets/herobanner.jpeg" alt="hero-image">
   <h2 class="subtitle">Boutique de Orquideas. <br>Somos una tienda dedicada a cultivar felicidad.</h2>
-  <div class="cart-container">
-    <div class="cart-article">
-      <img class="img-cart" src="assets/Phalaenopsis-sp.jpg" alt="orquidea Phalaenopsis">
-      <h3 class="article-name">Orquidea Phalaenopsis</h3>
-      <p>Precio: $1500</p>
-    </div>
-    <div class="cart-article">
-      <img class="img-cart" src="assets/Diuris.jpg" alt="orquidea diuris">
-      <h3 class="article-name">Orquidea Diuris</h3>
-      <p>Precio: $1800</p>
-    </div>
-    <div class="cart-buy">
-      <p> Total: $3300</p>
-      <button class="buy" onclick="window.location.href='login'">PAGAR </a></span>
-      </button>
-    </div>
-  </div>
+  <div id="carrito" class="cart-container"></div>
   <br>
   <br>
 </body>
 <footer>
   <%- include('../partials/footer'); %>
 </footer>
+<script src="scripts/cart.js"></script>
 
 </html>
