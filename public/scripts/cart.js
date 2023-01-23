@@ -1,24 +1,7 @@
-let products = [
-  {
-    "id": 4,
-    "nombre": "Orquidea Arundina",
-    "descripcion": "Una orquídea arundina es una variedad de orquídea que se caracteriza por sus flores grandes y vistosas. Esta orquídea también se conoce como orquídea de lirio de luna, debido a la forma de sus flores, que recuerda a la de un lirio. Esta orquídea es originaria de la selva tropical de América Central y del Sur, donde se encuentra comúnmente en los árboles. Esta es una de las orquídeas más populares para los jardines de interiores.",
-    "foto": "assets/Peristeria-elata.jpg",
-    "precio": 1600,
-    "quantity": 3,
-  },
-  {
-    "id": 5,
-    "nombre": "Orquidea Diuris",
-    "descripcion": "Una orquídea Diuris es una variedad de orquídea originaria de Australia. Esta orquídea se caracteriza por sus flores grandes y coloridas con una forma de campana. Estas flores tienen un tono amarillo pálido con una franja de color rosa y púrpura. Esta orquídea es una epífita, lo que significa que crece en la corteza de los árboles y no en el suelo. Esta orquídea se encuentra comúnmente en los bosques templados de Australia.",
-    "foto": "assets/Diuris.jpg",
-    "precio": 1500,
-    "quantity": 2,
-  }
-]; // INITIAL VALUE IS LOCALSTORAGE
+let products = JSON.parse(window.localStorage.getItem('cart')); // INITIAL VALUE IS LOCALSTORAGE
 
 function renderProducts() {
-  console.log(window.localStorage.getItem('cart'));
+  window.localStorage.setItem("cart", JSON.stringify(products));
   const myNode = document.querySelector("#carrito");
   myNode.innerHTML = "";
 
@@ -37,11 +20,13 @@ function renderProducts() {
     const buttonSum = document.createElement('button');
     buttonSum.addEventListener('click', () => sumProduct(product.id));
     buttonSum.textContent = "+";
+    buttonSum.classList.add('add');
     const quantity = document.createElement('p');
     quantity.textContent = product.quantity;
     const buttonSubstract = document.createElement('button');
     buttonSubstract.addEventListener('click', () => substractProduct(product.id));
     buttonSubstract.textContent = "-";
+    buttonSubstract.classList.add('add');
     container.appendChild(image);
     container.appendChild(name);
     container.appendChild(price);

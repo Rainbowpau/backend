@@ -163,6 +163,14 @@ width: 100%;
   color: #8C494F;
 } 
 
+.add {
+  border-radius: 20px;
+  padding: 10px;
+  border-color: pink;
+  background-color: lightpink;
+  color: #8C494F;
+} 
+
 button{
   color: #8C494F;
 }

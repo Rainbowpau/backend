@@ -3,7 +3,6 @@
 
 <head>
   <%- include('../partials/head'); %>
-  <script src="scripts/product-detail.js"></script>
 </head>
 
 <body>
@@ -31,5 +30,28 @@
 <footer>
   <%- include('../partials/footer'); %>
 </footer>
+<script>
+  async function addToCart(params) {
+    const products = JSON.parse(localStorage.getItem('cart'));
+    var test = '<%- JSON.stringify(product) %>';
+    const product = JSON.parse(test);
+    product.quantity = 1;
+    const prod = new Array(product);
+    const prodsString = JSON.stringify(prod);
+
+    console.log({products, product, prod, prodsString})
+    if (products) {
+      if (!products?.find((prod) => product.id === prod.id)) {
+        const all = products.concat(product)
+        const prodString = await JSON.stringify(all);
+        window.localStorage.setItem('cart', prodString);
+      }
+    } else {
+      window.localStorage.setItem('cart', prodsString);
+    }
+
+    window.location.href = window.location.origin + '/carrito';
+  }
+</script>
 
 </html>
