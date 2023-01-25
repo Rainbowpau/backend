@@ -5,6 +5,31 @@ var bodyParser = require('body-parser');
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser")
 const { body, validationResult } = require('express-validator')
+const mysql = require('mysql');
+
+//establezco parametros de coneccion con mi base de datos
+const connection = mysql.createConnection(
+  {
+    host: '127.0.0.1',
+    user: 'root',
+    password: 'password',
+    database: 'boutique_orquideas',
+  }
+);
+
+//conecto mi base de batos
+connection.connect(function (err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('DB Conected');
+  }
+});
+
+const CREATE_USER = "INSERT INTO usuarios values(?, ?, ?)"
+
+const GET_USER = "SELECT * FROM usuarios WHERE nombre=?"
+const GET_ALL_USER = "SELECT * FROM usuarios"
 
 //numero para bycript
 const saltRounds = 10;
@@ -42,6 +67,35 @@ app.get('/', (req, res) => {
   res.send(products);
 })
 
+//busco el usuario
+app.get('/api/users', (req, res) => {
+  const users = connection.query(GET_ALL_USER, (err, result) => {
+    console.log(result);
+    if (err) {
+      res.send("hay un error")
+    }
+    else {
+      res.send(result)
+    }
+  })
+})
+
+// CREO UN USUARIO
+app.post('/api/users', (req, res) => {
+  const user = req.body.email;
+  const pass = req.body.password
+  console.log(123, req.body);
+  connection.query(CREATE_USER, [user, pass, 'token'], (err, result) => {
+    console.log(result);
+    if (err) {
+      res.send("hay un error")
+    }
+    else {
+      res.send(result)
+    }
+  })
+})
+
 app.get('/carrito', (req, res) => {
   res.render('carrito');
 })
@@ -55,7 +109,7 @@ app.get('/product-detail-:id', (req, res) => {
   const products = JSON.parse(producstFS);
   const product = products.find(product => product.id.toString() === req.params.id)
   if (product) {
-    res.render('product-detail', {product})
+    res.render('product-detail', { product })
   } else {
     res.status(404).send('Pagina no encontrada');
   }
@@ -112,8 +166,8 @@ app.post("/login",
       const user = usersParsed.find((user) => user.email === email)
       if (user) {
         bcrypt.compare(password, user.password, function (err, result) {
-          if (result){
-            res.cookie('boutiqueSessionLogued',true, { maxAge: 900000, httpOnly: true });
+          if (result) {
+            res.cookie('boutiqueSessionLogued', true, { maxAge: 900000, httpOnly: true });
             return res.redirect('/');
           } else {
             return res.status(400).send("contrasena incorrecta")
