@@ -39,7 +39,7 @@ app.listen(PORT, () => console.log('escuchando en el puerto', PORT))
 app.get('/', (req, res) => {
   const producstFS = fs.readFileSync(__dirname + "/products.json", "utf-8");
   const products = JSON.parse(producstFS);
-  res.render('index', {products});
+  res.send(products);
 })
 
 app.get('/carrito', (req, res) => {
