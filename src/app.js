@@ -84,14 +84,29 @@ app.get('/api/users', (req, res) => {
 app.post('/api/users', (req, res) => {
   const user = req.body.email;
   const pass = req.body.password
-  console.log(123, req.body);
   connection.query(CREATE_USER, [user, pass, 'token'], (err, result) => {
-    console.log(result);
     if (err) {
       res.send("hay un error")
     }
     else {
-      res.send(result)
+      res.send({nombre: user})
+    }
+  })
+})
+
+//  LOGIN USUARIO
+app.post('/api/login', (req, res) => {
+  const user = req.body.email;
+  const pass = req.body.password
+  connection.query(GET_USER, [user], (err, result) => {
+    if (err || result.length === 0) {
+      res.status(404).send("USUARIO NO ENCONTRADO")
+    } else {
+      if(result[0].contrasena === pass) {
+        res.send(result[0])
+      } else {
+        res.status(404).send("CONTRASEÑA INCORRECTA")
+      }
     }
   })
 })
