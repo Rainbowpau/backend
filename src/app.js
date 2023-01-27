@@ -31,6 +31,8 @@ const CREATE_USER = "INSERT INTO usuarios values(?, ?, ?)"
 const GET_USER = "SELECT * FROM usuarios WHERE nombre=?"
 const GET_ALL_USER = "SELECT * FROM usuarios"
 
+const GET_ALL_PRODUCTS = "SELECT * FROM products"
+
 //numero para bycript
 const saltRounds = 10;
 
@@ -69,7 +71,7 @@ app.get('/', (req, res) => {
 
 //busco el usuario
 app.get('/api/users', (req, res) => {
-  const users = connection.query(GET_ALL_USER, (err, result) => {
+  connection.query(GET_ALL_USER, (err, result) => {
     console.log(result);
     if (err) {
       res.send("hay un error")
@@ -107,6 +109,19 @@ app.post('/api/login', (req, res) => {
       } else {
         res.status(404).send("CONTRASEÑA INCORRECTA")
       }
+    }
+  })
+})
+
+//muestro mis productos
+app.get('/api/products', (req, res) => {
+   connection.query(GET_ALL_PRODUCTS, (err, result) => {
+    console.log(result);
+    if (err) {
+      res.send("hay un error")
+    }
+    else {
+      res.send(result)
     }
   })
 })
@@ -198,3 +213,4 @@ app.post("/login",
 app.get('*', function (req, res) {
   res.status(404).send('Pagina no encontrada');
 });
+
