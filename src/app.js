@@ -32,6 +32,7 @@ const GET_USER = "SELECT * FROM usuarios WHERE nombre=?"
 const GET_ALL_USER = "SELECT * FROM usuarios"
 
 const GET_ALL_PRODUCTS = "SELECT * FROM products"
+const GET_PRODUCT_BY_ID = "SELECT * FROM products WHERE id=?"
 
 //numero para bycript
 const saltRounds = 10;
@@ -125,6 +126,18 @@ app.get('/api/products', (req, res) => {
     }
   })
 })
+
+app.get('/api/products/:id', (req, res) => {console.log(req.params.id);
+  connection.query(GET_PRODUCT_BY_ID, [Number(req.params.id)], (err, result) => {
+    console.log(err, result);
+    if (err || result.length === 0) {
+      res.status(404).send("PRODUCTO NO ENCONTRADO")
+    } else {
+      res.send(result[0])
+    }
+  })
+})
+
 
 app.get('/carrito', (req, res) => {
   res.render('carrito');
